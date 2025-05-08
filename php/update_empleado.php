@@ -29,6 +29,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $imagen_empleado = $_FILES['imagen_empleado'];
     $img_path = NULL; // Ruta por defecto para la imagen
 
+    // Verificar si la clave ya existe en otro registro
+    $checkClaveQuery = "SELECT COUNT(*) FROM empleados WHERE clave = ? AND id != ?";
+    $checkClaveStmt = $conexion->prepare($checkClaveQuery);
+    $checkClaveStmt->bind_param("si", $clave, $id);
+    $checkClaveStmt->execute();
+    $checkClaveStmt->bind_result($claveCount);
+    $checkClaveStmt->fetch();
+    $checkClaveStmt->close();
+
+    if ($claveCount > 0) {
+        echo '
+            <script>
+                alert("Error: La clave ya está asignada a otro empleado. Por favor, use una clave diferente.");
+                window.history.back();
+            </script>
+        ';
+        exit; // Detener la ejecución si la clave ya existe
+    }
+
+
     if ($imagen_empleado['size'] > 0) {
         $img_name = uniqid() . '_' . basename($imagen_empleado['name']);
         $img_path = 'uploads/' . $img_name;

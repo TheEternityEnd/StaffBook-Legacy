@@ -118,7 +118,6 @@
     </div>
 
     <!--Formulario de registro-->
-    
     <div class="container">
         <h1>Formulario de Registro de Empleado</h1>
         <form action="../php/procesar_empleado.php" method="POST" enctype="multipart/form-data">
@@ -138,8 +137,8 @@
                     <option value="Analista">Analista</option>
                     <option value="Apoyo">Apoyo</option>
                     <option value="Docencia">Docencia</option>
-                    <option value="Incapacidad">Incapacidad</option>
-                    <option value="Incapacidad Permanente">Incapacidad Permanente</option>
+                    <!-- <option value="Incapacidad">Incapacidad</option>
+                    <option value="Incapacidad Permanente">Incapacidad Permanente</option> -->
                     <option value="Servicio">Servicio</option>
                 </select>
             </div>

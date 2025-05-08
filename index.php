@@ -51,7 +51,7 @@
             <button class="button1 " type="submit ">Iniciar Sesión</button>
             <button class="button2 " type="button" id="toForm2">Registrarse</button>
         </div>
-        <button class="button3 " type="button">Olvidé mi contraseña</button>
+        <button class="button3 " type="button"></button>
     </form>
 
 

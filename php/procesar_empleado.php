@@ -1,4 +1,4 @@
-<?php
+Canvas <?php
 // Iniciar la sesión
 session_start();
 include '../php/conexion_be.php'; // Conexión a la base de datos
@@ -31,6 +31,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $imagen_empleado = $_FILES['imagen_empleado'];
     $img_path = NULL; // Ruta por defecto para la imagen
 
+
+      // Verificar si la clave ya existe
+    $checkClaveQuery = "SELECT COUNT(*) FROM empleados WHERE clave = ?";
+    $checkClaveStmt = $conexion->prepare($checkClaveQuery);
+    $checkClaveStmt->bind_param("s", $clave);
+    $checkClaveStmt->execute();
+    $checkClaveStmt->bind_result($claveCount);
+    $checkClaveStmt->fetch();
+    $checkClaveStmt->close();
+
+    if ($claveCount > 0) {
+        echo '
+            <script>
+                alert("Error: La clave ya existe. Por favor, use una clave diferente.");
+                window.history.back();
+            </script>
+        ';
+        exit; // Detener la ejecución si la clave ya existe
+    }
+  
     if ($imagen_empleado['size'] > 0) {
         $img_name = uniqid() . '_' . basename($imagen_empleado['name']);
         $img_path = 'uploads/' . $img_name; // Cambiar la ruta aquí para que solo guarde "uploads/"
@@ -105,6 +125,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Ejecutar la consulta y verificar errores
         if ($stmt->execute()) {
+
+          
             // Registrar la acción en la tabla movimientos_log
             $usuario = $_SESSION['usuario']; // Obtener el usuario actual desde la sesión
             $accion = $id ? "Actualización de empleado" : "Registro de empleado";

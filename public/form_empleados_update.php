@@ -163,8 +163,8 @@ $conexion->close();
                         <option value="Analista" <?php echo ($employee['funcion_empleado'] == 'Analista' ? 'selected' : ''); ?>>Analista</option>
                         <option value="Apoyo" <?php echo ($employee['funcion_empleado'] == 'Apoyo' ? 'selected' : ''); ?>>Apoyo</option>
                         <option value="Docencia" <?php echo ($employee['funcion_empleado'] == 'Docencia' ? 'selected' : ''); ?>>Docencia</option>
-                        <option value="Incapacidad" <?php echo ($employee['funcion_empleado'] == 'Incapacidad' ? 'selected' : ''); ?>>Incapacidad</option>
-                        <option value="Incapacidad Permanente" <?php echo ($employee['funcion_empleado'] == 'Incapacidad Permanente' ? 'selected' : ''); ?>>Incapacidad Permanente</option>
+                        <!-- <option value="Incapacidad" <?php echo ($employee['funcion_empleado'] == 'Incapacidad' ? 'selected' : ''); ?>>Incapacidad</option>
+                        <option value="Incapacidad Permanente" <?php echo ($employee['funcion_empleado'] == 'Incapacidad Permanente' ? 'selected' : ''); ?>>Incapacidad Permanente</option> -->
                         <option value="Servicio" <?php echo ($employee['funcion_empleado'] == 'Servicio' ? 'selected' : ''); ?>>Servicio</option>
                     </select>
                 </div>  

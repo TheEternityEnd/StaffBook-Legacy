@@ -32,12 +32,9 @@
     $stmt->close();
 
     // Obtener registros de la tabla movimientos_log
-    $query = "SELECT id, fecha_hora, usuario, accion, detalle FROM movimientos_log ORDER BY fecha_hora DESC";
+    $query = "SELECT id, fecha_hora, usuario, accion, detalle FROM movimientos_log ORDER BY id DESC";
     $result = $conexion->query($query);
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">

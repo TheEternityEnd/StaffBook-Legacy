@@ -95,6 +95,7 @@
                 <button type="submit"><span>🗂️</span> Historial</button>
             </form>
             <button onclick="window.location.href='./php/exportar_excel.php'"><span>📊</span> Exportar a Excel</button>
+            <button onclick="window.location.href='./php/exportar_excel.php'"><span>📊</span> Importar de Excel</button>
         </ul>
         <button class="logout" onclick="showLogoutConfirmation()"><span>⬅️</span> Cerrar Sesión</button>
     </div>
@@ -128,8 +129,8 @@
             <button class="category">Analista</button>
             <button class="category">Apoyo</button>
             <button class="category">Docencia</button>
-            <button class="category">Incapacidad</button>
-            <button class="category">Incapacidad Permanente</button>
+            <!-- <button class="category">Incapacidad</button>
+            <button class="category">Incapacidad Permanente</button> -->
             <button class="category">Servicio</button>
         </div>
 
@@ -204,7 +205,16 @@
                 </div>
             <?php } ?>
         <?php } else { ?>
-            <p>No hay empleados registrados.</p>
+            <p style="
+            grid-column: 1 / -1; /* Ocupa todas las columnas del grid */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px; /* Altura opcional */
+            margin: 0; /* Elimina márgenes por defecto */
+            font-size: 2.5rem;
+            color: #666;
+            ">No hay empleados registrados.</p>
         <?php } ?>
     </div>
 

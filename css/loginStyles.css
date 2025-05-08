@@ -143,13 +143,12 @@ main {
     transition: .4s ease-in-out;
     background-color: #031836;
     color: white;
-    cursor: pointer;
 }
 
-.button3:hover {
+/*.button3:hover {
     background-color: red;
     color: white;
-}
+}*/
 
 .cuadro-blanco {
     width: 100%;
