@@ -94,8 +94,8 @@
             <form action="php/redirigir_log.php">
                 <button type="submit"><span>🗂️</span> Historial</button>
             </form>
-            <button onclick="window.location.href='./php/exportar_excel.php'"><span>📊</span> Exportar a Excel</button>
-            <button onclick="window.location.href='./php/exportar_excel.php'"><span>📊</span> Importar de Excel</button>
+            <button onclick="window.location.href='./php/exportar_excel.php'"><span>📤</span> Exportar a Excel</button>
+            <button onclick="window.location.href='./php/importar_excel.php'"><span>📥</span> Importar de Excel</button>
         </ul>
         <button class="logout" onclick="showLogoutConfirmation()"><span>⬅️</span> Cerrar Sesión</button>
     </div>
@@ -114,6 +114,15 @@
                     </button>
                 </form>
             </li>
+            <?php if (isset($_SESSION['es_admin']) && $_SESSION['es_admin'] == 1): ?>
+                <li>
+                    <form action="php/redirigir_admin.php" method="POST" style="display: inline;">
+                        <button type="submit" style="background: none; border: none; font-size: inherit; cursor: pointer;">
+                            <span>🖥️</span> Administración
+                        </button>
+                    </form>
+                </li>
+            <?php endif; ?>
             <li>
                 <span>📖</span> 
                 <a href="public/StaffBook - Guia de usuario.pdf" target="_blank" style="text-decoration: none; color: inherit;">Guía</a>
@@ -273,7 +282,7 @@
             <button class="cancel-logout-btn" onclick="closeLogoutConfirmation()">Cancelar</button>
         </div>
     </div>
-
+    <!-- Ventana de confirmacion para eliminar empleado -->
     <div class="delete-confirm-overlay" id="delete-confirm-overlay" onclick="closeDeleteConfirmation()"></div>
     <div class="delete-confirm" id="delete-confirm">
         <p>¿Estás seguro de que deseas eliminar este empleado?</p>

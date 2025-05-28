@@ -97,7 +97,7 @@ $conexion->close();
     <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <img src="../images/avatar_ph.png" alt="Profile Picture" class="sidebar-img">
+            <img src="<?php echo htmlspecialchars($img_usuario); ?>" alt="Profile Picture" class="sidebar-img">
             <div>
                 <h3><?php echo htmlspecialchars($nombre_usuario); ?></h3>
                 <p><?php echo htmlspecialchars($email_usuario); ?></p>
@@ -105,9 +105,10 @@ $conexion->close();
         </div>
         <ul class="sidebar-menu">
             <form action="../php/redirigir_log.php">
-                <button class="history" type="submit"><span>🗂️</span> Historial</button>
+                <button type="submit"><span>🗂️</span> Historial</button>
             </form>
-            <button class="export" onclick="window.location.href='../php/exportar_excel.php'"><span>📊</span> Exportar a Excel</button>
+            <button onclick="window.location.href='../php/exportar_excel.php'"><span>📤</span> Exportar a Excel</button>
+            <button onclick="window.location.href='../php/importar_excel.php'"><span>📥</span> Importar de Excel</button>
         </ul>
         <button class="logout" onclick="showLogoutConfirmation()"><span>⬅️</span> Cerrar Sesión</button>
     </div>
@@ -116,19 +117,28 @@ $conexion->close();
     <div class="menu-overlay" id="menu-overlay" onclick="toggleMenuSidebar()"></div>
     <div class="menu-sidebar" id="menu-sidebar">
         <div class="menu-header">
-            <button class="menu-close" style="background: none;" onclick="toggleMenuSidebar()">⬅️</button>
+            <button class="menu-close" onclick="toggleMenuSidebar()">⬅️</button>
         </div>
         <ul class="menu-items">
             <li>
                 <form action="../php/redirigirEmpleado.php" method="POST" style="display: inline;">
-                    <button type="submit" style="background: none; border: none; font-size: inherit; cursor: pointer; color: black">
+                    <button type="submit" style="background: none; border: none; font-size: inherit; cursor: pointer; color: black;">
                         <span>👤➕</span> Agregar Empleado
                     </button>
                 </form>
             </li>
+            <?php if (isset($_SESSION['es_admin']) && $_SESSION['es_admin'] == 1): ?>
+                <li>
+                    <form action="../php/redirigir_admin.php" method="POST" style="display: inline;">
+                        <button type="submit" style="background: none; border: none; font-size: inherit; cursor: pointer; color: black;">
+                            <span>🖥️</span> Administración
+                        </button>
+                    </form>
+                </li>
+            <?php endif; ?>
             <li>
                 <span>📖</span> 
-                <a href="public/StaffBook - Guia de usuario.pdf" target="_blank" style="text-decoration: none; color: inherit;">Guía</a>
+                <a href="StaffBook - Guia de usuario.pdf" target="_blank" style="text-decoration: none; color: inherit;">Guía</a>
             </li>
         </ul>
     </div>

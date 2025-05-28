@@ -18,7 +18,9 @@ $resultado = $stmt->get_result();
 
 // Verificar si hay resultados (usuario encontrado)
 if ($resultado->num_rows > 0) {
-    $_SESSION['usuario'] = $usuario;
+    $fila = $resultado->fetch_assoc();
+    $_SESSION['usuario'] = $fila['usuario'];
+    $_SESSION['es_admin'] = $fila['admin'];
 
     // Llamar a log.php para registrar la acción
     $accion = "Inicio de Sesion";

@@ -225,3 +225,35 @@ document.querySelector('.search-bar input').addEventListener('input', function (
         }
     });
 });
+
+document.getElementById('btnImportarExcel').addEventListener('click', function () {
+  document.getElementById('inputExcel').click();
+});
+
+document.getElementById('inputExcel').addEventListener('change', function (event) {
+  const archivo = event.target.files[0];
+  if (!archivo) return;
+
+  const formData = new FormData();
+  formData.append('archivo_excel', archivo);
+
+  fetch('importar_excel.php', {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById('contenidoResultado').innerHTML = html;
+      document.getElementById('resultadoImportacion').style.display = 'block';
+    })
+    .catch(error => {
+      document.getElementById('contenidoResultado').innerHTML = `<p>Error al subir el archivo: ${error}</p>`;
+      document.getElementById('resultadoImportacion').style.display = 'block';
+    });
+});
+
+document.getElementById('cerrarResultado').addEventListener('click', function () {
+  document.getElementById('resultadoImportacion').style.display = 'none';
+});
+
+

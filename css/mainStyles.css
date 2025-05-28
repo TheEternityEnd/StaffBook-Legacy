@@ -214,11 +214,11 @@ body {
 /* Grid de las tarjetas */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* Mantén las tarjetas en filas de 7 */
-    gap: 30px; /* Espacio constante entre tarjetas */
-    width: 2280px; /* Ancho total de la fila */
-    margin: 20px auto; /* Centra el grid horizontalmente */
-    justify-items: center; /* Alinea todas las tarjetas al centro */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 2280px;
+    margin: 20px auto;
 }
 
 .card {
@@ -598,7 +598,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 1200px;
-    height: 1080px;
+    height: 775px;
     overflow-y: auto;
     background-color: white;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
@@ -746,57 +746,166 @@ body {
 }
 /*==============Fin Confirmar eliminar usuario=====================*/
 
+#resultadoImportacion {
+  display: none;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 20px;
+  border: 2px solid #888;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  max-width: 80%;
+}
 
+#cerrarResultado {
+  float: right;
+  background: #c00;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+
+/* Media Queries para resoluciones comunes */
+
+/* 2560px (2K) */
+@media (max-width: 2560px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+/* 1920px (Full HD) */
+@media (max-width: 1920px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .search-container {
+    width: 700px;
+  }
+}
+
+/* 1440px */
 @media (max-width: 1440px) {
-    .card-grid {
-        grid-template-columns: repeat(4, 1fr); /* 5 tarjetas por fila */
-        width: 1500px; /* Ajustar el ancho */
-        gap: 20px; /* Reducir el espacio entre tarjetas */
-    }
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .search-container {
+    width: 600px;
+  }
+  .card {
+    width: 280px;
+    height: auto;
+  }
+  .card-img {
+    width: 160px;
+    height: 160px;
+  }
 }
 
+/* 1024px (Tablets en horizontal) */
 @media (max-width: 1024px) {
-    .search-container {
-        width: 600px; /* Reduce el ancho */
-        height: 45px; /* Reduce la altura */
-    }
-
-    .card-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 tarjetas por fila */
-        width: 90%; /* Ancho fluido */
-        gap: 15px; /* Más compacto */
-    }
+  .header {
+    flex-direction: column;
+    height: auto;
+  }
+  .search-container {
+    width: 90%;
+  }
+  .filters {
+    flex-direction: column;
+  }
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .card {
+    width: 240px;
+  }
+  .sidebar, .menu-sidebar {
+    width: 300px;
+  }
 }
 
-/* Ajustes para pantallas pequeñas (ej. tablets y móviles grandes) */
+/* 768px (Tablets en vertical) */
 @media (max-width: 768px) {
-    .search-container {
-        width: 100%; /* Ancho completo */
-        height: 40px; /* Reduce aún más la altura */
-        border-radius: 3px; /* Ajusta el borde */
-    }
-
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 tarjetas por fila */
-        width: 100%; /* Ancho completo */
-        gap: 10px; /* Espacio mínimo */
-    }
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .card {
+    width: 220px;
+  }
+  .card-img {
+    width: 140px;
+    height: 140px;
+  }
+  .sidebar-menu li,
+  .sidebar-menu button,
+  .logout,
+  .menu-items li {
+    font-size: 24px;
+  }
+  .details-top img {
+    width: 150px;
+    height: 150px;
+  }
 }
 
-/* Ajustes para pantallas muy pequeñas (ej. teléfonos pequeños) */
+/* 480px (Smartphones) */
 @media (max-width: 480px) {
-    .search-container {
-        width: 100%; /* Ancho completo */
-        height: 35px; /* Más compacto */
-        box-shadow: none; /* Elimina la sombra */
-    }
-
-    .card-grid {
-        grid-template-columns: repeat(1, 1fr); /* 1 tarjeta por fila */
-        gap: 5px; /* Reducir aún más el espacio */
-    }
-
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+  .card {
+    width: 190px;
+  }
+  .card-img {
+    width: 120px;
+    height: 120px;
+  }
+  .header, .filters {
+    flex-direction: column;
+    align-items: center;
+  }
+  .menu-icon, .profile span {
+    font-size: 24px;
+  }
+  .search-container {
+    height: 40px;
+    width: 90%;
+  }
+  .filters select {
+    font-size: 20px;
+  }
+  .category {
+    font-size: 20px;
+    height: auto;
+  }
+  .letter {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  .scroll-to-top {
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+  }
+  .sidebar, .menu-sidebar {
+    width: 250px;
+  }
+  .details-top img {
+    width: 120px;
+    height: 120px;
+  }
 }
+
+
 /*Batalle un chingo en hacer que la pagina principal se miraran bien
 y ni si quiera se si lo que quiero hacer va a funcionar, actualizare
 si si funciono. Si no, aparecere en las noticias :skull:*/
