@@ -72,7 +72,7 @@
     <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <img src="<?php echo htmlspecialchars($img_usuario); ?>" alt="Profile Picture" class="sidebar-img">
+            <img src="../images/avatar_ph.png" alt="Profile Picture" class="sidebar-img">
             <div>
                 <h3><?php echo htmlspecialchars($nombre_usuario); ?></h3>
                 <p><?php echo htmlspecialchars($email_usuario); ?></p>
@@ -83,7 +83,7 @@
                 <button type="submit"><span>🗂️</span> Historial</button>
             </form>
             <button onclick="window.location.href='../php/exportar_excel.php'"><span>📤</span> Exportar a Excel</button>
-            <button onclick="window.location.href='../php/importar_excel.php'"><span>📥</span> Importar de Excel</button>
+            <button onclick="window.location.href='../php/redirigir_importar.php'"><span>📥</span> Importar de Excel</button>
         </ul>
         <button class="logout" onclick="showLogoutConfirmation()"><span>⬅️</span> Cerrar Sesión</button>
     </div>

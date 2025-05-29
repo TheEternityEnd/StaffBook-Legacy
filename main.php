@@ -95,7 +95,7 @@
                 <button type="submit"><span>🗂️</span> Historial</button>
             </form>
             <button onclick="window.location.href='./php/exportar_excel.php'"><span>📤</span> Exportar a Excel</button>
-            <button onclick="window.location.href='./php/importar_excel.php'"><span>📥</span> Importar de Excel</button>
+            <button onclick="window.location.href='./php/redirigir_importar.php'"><span>📥</span> Importar de Excel</button>
         </ul>
         <button class="logout" onclick="showLogoutConfirmation()"><span>⬅️</span> Cerrar Sesión</button>
     </div>
@@ -206,7 +206,6 @@
                             <button 
                                 class="delete-button" 
                                 type="button" 
-
                                 onclick="event.stopPropagation(); showDeleteConfirmation(<?php echo $row['id']; ?>)">❌
                             </button>
                         </div>
