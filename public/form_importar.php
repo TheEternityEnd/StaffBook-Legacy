@@ -110,6 +110,14 @@
 
             if ($insertados > 0) {
                 $mensaje = "<div class='success-message'>Importación completada: $insertados empleados importados correctamente.</div>";
+                
+                // Registrar en el log de movimientos
+                $accion = "Importación de Empleados";
+                $detalle = "Se importaron $insertados empleados desde archivo Excel";
+                $stmt_log = $conexion->prepare("INSERT INTO movimientos_log (usuario, accion, detalle) VALUES (?, ?, ?)");
+                $stmt_log->bind_param('sss', $usuario, $accion, $detalle);
+                $stmt_log->execute();
+                $stmt_log->close();
             }
 
             if (!empty($errores)) {
@@ -118,10 +126,28 @@
                     $mensaje .= "<li>$error</li>";
                 }
                 $mensaje .= "</ul></div>";
+                
+                // Registrar errores en el log si hubo intento de importación
+                if ($insertados > 0 || count($errores) > 0) {
+                    $accion = "Importación con errores";
+                    $detalle = "Se importaron $insertados empleados con ".count($errores)." errores";
+                    $stmt_log = $conexion->prepare("INSERT INTO movimientos_log (usuario, accion, detalle) VALUES (?, ?, ?)");
+                    $stmt_log->bind_param('sss', $usuario, $accion, $detalle);
+                    $stmt_log->execute();
+                    $stmt_log->close();
+                }
             }
 
         } catch (Exception $e) {
             $mensaje = "<div class='error-message'>Error al leer el archivo: " . $e->getMessage() . "</div>";
+            
+            // Registrar error fatal en el log
+            $accion = "Error en Importación";
+            $detalle = "Error al procesar archivo Excel: " . $e->getMessage();
+            $stmt_log = $conexion->prepare("INSERT INTO movimientos_log (usuario, accion, detalle) VALUES (?, ?, ?)");
+            $stmt_log->bind_param('sss', $usuario, $accion, $detalle);
+            $stmt_log->execute();
+            $stmt_log->close();
         }
     }
 ?>

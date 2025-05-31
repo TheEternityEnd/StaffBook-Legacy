@@ -256,4 +256,3 @@ document.getElementById('cerrarResultado').addEventListener('click', function ()
   document.getElementById('resultadoImportacion').style.display = 'none';
 });
 
-

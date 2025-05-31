@@ -8,15 +8,15 @@ $contrasena = $_POST['passLogin'];
 // Encriptar la contraseña usando hash
 $contrasena = hash('sha512', $contrasena);
 
-// Preparar la consulta para evitar inyecciones SQL
-$stmt = $conexion->prepare("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?");
+// Preparar la consulta para verificar usuario, contraseña Y estado de verificación
+$stmt = $conexion->prepare("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ? AND verificado = 1");
 $stmt->bind_param('ss', $usuario, $contrasena);  // 'ss' significa que ambos parámetros son cadenas (strings)
 
 // Ejecutar la consulta
 $stmt->execute();
 $resultado = $stmt->get_result();
 
-// Verificar si hay resultados (usuario encontrado)
+// Verificar si hay resultados (usuario encontrado Y verificado)
 if ($resultado->num_rows > 0) {
     $fila = $resultado->fetch_assoc();
     $_SESSION['usuario'] = $fila['usuario'];
@@ -42,18 +42,35 @@ if ($resultado->num_rows > 0) {
 
     exit();
 } else {
-    // Mensaje de error si los datos no coinciden
-    echo '
-        <script>
-            alert("Usuario y/o contraseña incorrectos.");
-            window.location = "../index.php";
-        </script>
-    ';
+    // Verificar si el usuario existe pero no está verificado
+    $stmt_unverified = $conexion->prepare("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ? AND verificado = 0");
+    $stmt_unverified->bind_param('ss', $usuario, $contrasena);
+    $stmt_unverified->execute();
+    $unverified_result = $stmt_unverified->get_result();
+    
+    if ($unverified_result->num_rows > 0) {
+        // Mensaje específico para usuario no verificado
+        echo '
+            <script>
+                alert("Tu cuenta no ha sido verificada. Por favor, verifica tu cuenta antes de iniciar sesión.");
+                window.location = "../index.php";
+            </script>
+        ';
+    } else {
+        // Mensaje genérico para credenciales incorrectas
+        echo '
+            <script>
+                alert("Usuario y/o contraseña incorrectos o cuenta no verificada.");
+                window.location = "../index.php";
+            </script>
+        ';
+    }
     exit();
 }
 
 // Cerrar las sentencias preparadas y la conexión
 $stmt->close();
-$stmt_update->close();
+if (isset($stmt_update)) $stmt_update->close();
+if (isset($stmt_unverified)) $stmt_unverified->close();
 $conexion->close();
 ?>
