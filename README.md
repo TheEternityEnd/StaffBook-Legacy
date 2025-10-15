@@ -1,6 +1,7 @@
 =================================================================
 =============== VER EN RAW PARA MEJOR COMPRENSION ===============
 =================================================================
+Version descontinuada
 
 Este es un proyecto integrador diseñado para el Intituto Tecnologico Superior de Puerto Peñasco.
 
